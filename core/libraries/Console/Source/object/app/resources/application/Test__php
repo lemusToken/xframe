@@ -1,0 +1,85 @@
+<?php
+namespace [APPSPACE]\App;
+use \Libs\Fapis\Apis;
+use \Libs\Utils\Request;
+
+/**
+ * Class Test
+ * @package [APPSPACE]\App
+ */
+class Test extends App {
+
+    /**
+     * 返回false时，程序不向下执行，否则继续执行
+     * 可用于该控制器下的权限控制
+     * @return bool
+     */
+    public function all() {
+        if (\Libs\Utils\Common::isProv()){
+            echo '无访问权限！';
+            return false;
+        }
+        echo '测试页面!';
+        return true;
+    }
+
+    //act index
+    public function index() {
+        $data = [
+            'a'=>'a val',
+            'b'=>'值'
+        ];
+        $data['vm_index'] = $this->vm('index');
+        $this->render($data);
+    }
+
+    public function pdo() {
+        $this->vm('Demo\\Db')->demo();
+    }
+
+    public function syms() {
+        $this->vm('Demo\\Symbol')->demo();
+    }
+
+    public function cfg() {
+        $this->vm('Demo\\Config')->demo();
+    }
+
+    public function cache() {
+        dump($this->vm('Demo\\Cache')->demo());
+//        $this->vm('Demo\\Cache')->clear('demo');
+    }
+
+    public function encrypt() {
+        $this->vm('Demo\\Encrypt')->demo();
+    }
+
+    public function multipage() {
+        $index = Request::get('ti');
+        $file = empty($index)?"multipage/demo":"multipage/demo$index";
+        $data = [];
+        switch ($index) {
+            case '1':
+                $data['a'] = 'demo1';
+                $data['r'] = '固定值:demo1';
+                break;
+            case '2':
+                $data['a'] = 'demo2';
+                $data['r'] = '随机值:'.mt_rand(1,1000000);
+                break;
+            case '3':
+                $data['a'] = 'demo3';
+                $data['r'] = '随机值:'.mt_rand(1,1000000);
+                break;
+            default:
+                $data['a'] = 'demo';
+                $data['r'] = '固定值:demo';
+                break;
+        }
+        return $this->render($file,$data);
+    }
+
+    public function api() {
+        dump(Apis::client('framework_manage','INTERFACE_REFLECTION_LIST',[]));
+    }
+}

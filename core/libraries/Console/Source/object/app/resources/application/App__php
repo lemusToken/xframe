@@ -1,0 +1,20 @@
+<?php
+//App
+namespace [APPSPACE]\App;
+use \Libs\Application\Base;
+
+
+/**
+ * 基类
+ * Class App
+ * @package [APPSPACE]
+ */
+class App extends Base {
+
+    public function init() {
+        $extend = $this->extendGlobal();
+
+        //添加模板全局变量
+        $extend->add('ENV',$this->symbol()->parse('env'));
+    }
+}

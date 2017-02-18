@@ -1,0 +1,33 @@
+<?php
+namespace [APPSPACE]\VM\Demo;
+
+class Cache extends \[APPSPACE]\VM\Vmodel{
+
+    public function demo() {
+        //缓存默认使用memcache，memcache不可用时使用文件缓存
+        //获取缓存，注意不需要指定键名，因为键名是根据调用路径自动生成的
+        $data = $this->cache();
+        //也可以用flag指定特殊前缀
+        //$data = $this->flag('some')->cache();
+        if (!empty($data)) {
+            dump('缓存已存在！');
+            return $data;
+        }
+        dump('重建缓存');
+        //创建缓存并赋值
+        //数据，过期时间(秒)
+        //利用前缀存储，$data = $this->flag('some')->cache(['somedata']);
+        return $this->cache([
+            'key'=>'some val'
+        ],60);
+    }
+
+    /**
+     * 清除缓存
+     * @param $name string 方法名
+     * @return bool
+     */
+    public function clear($name) {
+        return parent::clear($name);
+    }
+}

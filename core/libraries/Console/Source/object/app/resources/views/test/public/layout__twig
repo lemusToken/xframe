@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh-cmn">
+<head>
+    {#包含#}
+    {{ include('test/public/meta.twig') }}
+    <title>{% block title %}测试{% endblock %}</title>
+    {% block assets_header %}
+        <script>
+            alert('parent header');
+        </script>
+    {% endblock %}
+</head>
+<body>
+{% block content_header %}{% endblock %}
+{% block content %}{% endblock %}
+{% block content_footer %}{% endblock %}
+{% block assets_footer %}
+    <script>
+        alert('parent footer');
+    </script>
+{% endblock %}
+</body>
+</html>

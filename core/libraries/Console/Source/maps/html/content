@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>[DBNAME]数据库词典</title>
+    <link rel="icon" href="" />
+    <style type="text/css">
+        body {
+            font-family: "Microsoft YaHei", sans-serif;
+            font-weight: 300;
+            line-height: 1.42em;
+            color:#A7A1AE;
+            background-color:#1F2739;
+            overflow-x: hidden;
+        }
+
+        h1 {
+            font-size:3em;
+            font-weight: 300;
+            line-height:1em;
+            text-align: center;
+            color: #4DC3FA;
+        }
+
+        h2 {
+            font-size:1em;
+            font-weight: 300;
+            text-align: center;
+            display: block;
+            line-height:1em;
+            padding-bottom: 2em;
+            color: #FB667A;
+        }
+
+        h2 a {
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #FB667A;
+            text-decoration: none;
+        }
+
+        .container th h1 {
+            font-weight: bold;
+            font-size: 1em;
+            text-align: left;
+        }
+
+        .container td {
+            font-weight: normal;
+            font-size: 1em;
+            -webkit-box-shadow: 0 2px 2px -2px #0E1119;
+            box-shadow: 0 2px 2px -2px #0E1119;
+        }
+
+        .main {
+            overflow-x: auto;
+        }
+
+        .container {
+            text-align: left;
+            overflow: hidden;
+            width: 100%;
+            min-width: 500px;
+            margin: 0 auto;
+            display: table;
+        }
+
+        .container td, .container th {
+            padding: 5px;
+        }
+
+        .container tr,.container td {
+            transition-duration: .6s;
+            transition-property: all;
+        }
+
+        .container tr:nth-child(odd) {
+            background-color: #323C50;
+        }
+
+        .container tr:nth-child(even) {
+            background-color: #2C3446;
+        }
+
+        .container th {
+            background-color: #1F2739;
+        }
+
+        .container td:first-child { color: #FB667A; }
+
+        .container tr:hover {
+            background-color: #464A52;
+            -webkit-box-shadow: 0 6px 6px -6px #0E1119;
+            box-shadow: 0 6px 6px -6px #0E1119;
+        }
+
+        .container td:hover {
+            background-color: #FFF842;
+            color: #403E10;
+            -webkit-box-shadow: #7F7C21 -1px 1px, #7F7C21 1px 1px, #7F7C21 -2px 2px, #7F7C21 -3px 3px, #7F7C21 -2px 2px, #7F7C21 -3px 3px;
+            box-shadow: #7F7C21 -1px 1px, #7F7C21 1px 1px, #7F7C21 -2px 2px, #7F7C21 -3px 3px, #7F7C21 -2px 2px, #7F7C21 -3px 3px;
+            transform: translate3d(2px, -2px, 0);
+        }
+
+        #to-top {
+            position: fixed;
+            right:10px;
+            bottom:10px;
+            z-index:100;
+        }
+        #to-top>a {
+            color:white;
+        }
+
+        body.light {
+            background-color:#FFF;
+        }
+
+        .light h1 {
+            color: #66CC99;
+        }
+
+        .light h2 {
+            color: #6996c3;
+        }
+
+        .light .notice {
+            color: #6699CC;
+        }
+
+        .light .container {
+            border: 1px solid #CCC;
+        }
+
+        .light .container td,.light .container tr,.light .container th {
+            background-color: transparent;
+        }
+
+        .light .container td {
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            border: 1px solid #CCC;
+        }
+
+        .light .container thead {
+            background-color: #f8f8f8;
+        }
+
+        .light .container th {
+            border: 1px solid #CCC;
+        }
+
+        .light .container td:hover {
+            border: none;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+        }
+
+        .light .container tr:hover {
+            background-color: #ffffcc !important;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+        }
+
+        .light .container tr:nth-child(even) {
+            background-color: #f8f8f8;
+        }
+    </style>
+</head>
+<body class="light">
+<div style="display: inline-block">
+    <select id="open-light">
+        <option value="1">开灯</option>
+        <option value="2">关灯</option>
+    </select>
+    搜索表名：<input id="search-input" type="search"><button id="search-btn">搜索</button>
+</div>
+<div id="to-top"><a href="#search-input">回到顶部</a></div>
+[CONTENT]
+<h1>表结构重复的表</h1>
+<div class="main">
+    <table class="container">
+        <thead>
+            <tr>
+                <th width="30%"><h1>已有表</h1></th>
+                <th width="70%"><h1>重复的表</h1></th>
+            </tr>
+        </thead>
+        <tbody>
+        [DUPLICATE]
+        </tbody>
+    </table>
+</div>
+<script>
+    (function(){
+        function Listen(elem,type,eventHandle){
+            if ( elem.addEventListener ) {
+                elem.addEventListener( type, eventHandle, false );
+
+            } else if ( elem.attachEvent ) {
+                elem.attachEvent( 'on' + type, eventHandle );
+            }
+        }
+
+        var search = document.getElementById('search-input');
+        var openLight = document.getElementById('open-light');
+
+        function run() {
+            if (!search.value) return;
+            var href = window.location.href,p;
+            if ((p=href.indexOf('#'))>-1) {
+                href = href.replace(href.substr(p),'#'+search.value);
+            }
+            else {
+                href += '#'+search.value;
+            }
+            window.location.href = href;
+        }
+
+        Listen(document.getElementById('search-btn'),'click',function(){
+            run();
+        });
+
+        Listen(search,'keyup',function(e){
+            if (e.keyCode===13) {
+                run();
+            }
+        });
+
+        Listen(openLight,'change',function(e){
+            if (this.value==='1') {
+                document.body.className='light';
+            }
+            else {
+                document.body.className='';
+            }
+        });
+    })();
+</script>
+</body>
+</html>

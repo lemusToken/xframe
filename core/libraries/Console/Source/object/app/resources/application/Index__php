@@ -1,0 +1,19 @@
+<?php
+//Index
+namespace [APPSPACE]\App;
+
+
+/**
+ * Class Index
+ * @package [APPSPACE]
+ */
+class Index extends App {
+
+    /**
+     * act index
+     */
+    public function index() {
+        $data = $this->vm('index')->demo();
+        $this->render($data);
+    }
+}

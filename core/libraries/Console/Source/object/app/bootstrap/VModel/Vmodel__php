@@ -1,0 +1,7 @@
+<?php
+namespace [APPSPACE]\VM;
+use \Libs\VModel\Base;
+
+class Vmodel extends Base {
+
+}

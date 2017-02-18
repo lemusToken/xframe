@@ -1,0 +1,113 @@
+<?php
+namespace [APPSPACE]\VM\Demo;
+use \Libs\VModel\BaseTable;
+/**
+ * 数据库表对象层的操作样例
+ * @author JerryLi
+ * @version 2016.12.29
+ */
+class ExampleTable extends BaseTable {
+    /**
+     * 数据库链接配置名称
+     * @var string
+     */
+    const DB_CFG_NAME = 'chemao';
+    
+    public function __construct(){
+        /*主表的字段定义*/
+        $aFields = array(
+            'id'=>'id',
+            'name'=>'地区名称',
+            'lng'=>'经度',
+            'lat'=>'维度',
+            'py_szm'=>'拼音首字母',
+            'py'=>'地区拼音采用58的拼音',
+            'py_short'=>'拼音简写',
+            'parent_id'=>'父id(省份id)',
+            'parent_city_id'=>'二级id(城市id)',
+            'encoding'=>'行政编码',
+            'is_hot'=>'是否是热门城市',
+            'is_delete'=>'是否删除，默认0不删除、1删除',
+        );
+        /*构造初始化数据*/
+        parent::__construct('fc_58_area', $aFields, self::DB_CFG_NAME);
+    }
+    
+    public function testDB() {
+        /*获取主表名称*/
+        var_dump($this->sTabN);
+        
+        /*获取详情*/
+//         var_dump($this->getInfoById(220));
+        
+        /*获取统计值*/
+//         $aSql = array();
+//         $aSql[] = 'SELECT COUNT(0)';
+//         $aSql[] =  ' FROM '. $this->sTabN;
+//         $aSql[] = ' WHERE id>:id';
+//         var_dump($this->getCnt($aSql, [':id'=>1]));
+        
+        /*获取单行记录*/
+//         $aSql = array();
+//         $aSql[] = 'SELECT '. implode(',', $this->aField);
+//         $aSql[] =  ' FROM '. $this->sTabN;
+//         $aSql[] = ' WHERE id=:id';
+//         var_dump($this->get_row($aSql, [':id'=>220]));
+        
+        /*获取整个记录集*/
+//         $aSql = array();
+//         $aSql[] = 'SELECT '. implode(',', $this->aField);
+//         $aSql[] =  ' FROM '. $this->sTabN;
+//         $aSql[] = ' WHERE id>:id';
+//         var_dump($this->find($aSql, [':id'=>220], [\PDO::PARAM_INT]));
+        /*获取整个记录集 - 之 IN 的操作*/
+//         $aSql = array();
+//         $aSql[] = 'SELECT '. implode(',', $this->aField);
+//         $aSql[] =  ' FROM '. $this->sTabN;
+//         $aSql[] = ' WHERE id IN (:ids)';
+//         var_dump($this->find($aSql, [':ids'=>[220,221]], [':ids'=>\Doctrine\DBAL\Connection::PARAM_INT_ARRAY]));
+
+        /*获取整个记录集 - 之 分页获取*/
+//         $aSql = array();
+//         $aSql[] = 'SELECT '. implode(',', $this->aField);
+//         $aSql[] =  ' FROM '. $this->sTabN;
+//         $aSql[] = ' WHERE id>:id';
+//         var_dump($this->findPage($aSql, [':id'=>220], [\PDO::PARAM_INT], 1, 2) );
+
+        /*插入单行记录*/
+//         $aInDt = array('user_id'=>11911, 'equipment'=>'123123ed4', 'app_name'=>'wap',
+//             'imuser_userid'=>'im123456', 'imuser_password'=>'sadf123', 'gmt_create'=>time(), 'gmt_modify'=>time());
+//         var_dump($this->insert($aInDt, 'fc_test'));
+        
+        /*批量插入记录*/
+//         $aFields = array('user_id', 'equipment', 'app_name', 'imuser_userid', 'imuser_password', 'gmt_create', 'gmt_modify');
+//         $aValue = array();
+//         for ($i=0; $i<500; $i++){ //测试一次插入500条记录
+//             $aValue[] = array(rand(10000, 99999), 'abcdef'.rand(1000000, 9999999), 'wap', rand(10000, 99999), '12345678', time(), time());
+//         }
+//         var_dump($this->insertBatch($aFields, $aValue, 'fc_test'));
+
+        /*插入单行记录（延迟插入）*/
+//         $aInDt = array('user_id'=>11911, 'equipment'=>'123123ed3', 'app_name'=>'wap', 
+//             'imuser_userid'=>'im123456', 'imuser_password'=>'sadf123', 'gmt_create'=>time(), 'gmt_modify'=>time());
+//         var_dump($this->insertDelay($aInDt, 'fc_test'));
+
+        /*单表记录更新*/
+//         $aIUpDt = array('user_id'=>20000, 'app_name'=>'wap', 'gmt_modify'=>time());
+//         var_dump($this->update($aIUpDt, 'id>:id', [':id'=>1500], 'fc_test'));
+
+        /*单表删除记录*/
+//         var_dump($this->delete('id=:id', [':id'=>1504], 'fc_test'));
+
+        exit();
+    }
+    /**
+     * 获取信息的详情
+     * @param int $iAreaId
+     * @param array $aFields
+     * @return false | array()
+     */
+    public function getInfoById($iAreaId, $aFields=array()){
+        return parent::get_info_by_id(intval($iAreaId), $aFields, 'id');
+    }
+}

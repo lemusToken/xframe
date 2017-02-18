@@ -1,0 +1,2 @@
+<div><span>{{ a }}</span> {{ r }}</div>
+{{ load('test/multipage/3')|raw }}

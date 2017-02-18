@@ -1,0 +1,33 @@
+<?php
+namespace [APPSPACE]\VM\Demo;
+
+use Libs\Utils\Cryption\Exor;
+use Libs\Utils\Cryption\JWT;
+
+class Encrypt extends \[APPSPACE]\VM\Vmodel{
+
+    public function demo() {
+        /*xor*/
+        //输入的字符串
+        $content = 'some1234密码5678thing';
+        //密钥
+        $key = 'chemao1234';
+        //加密
+        $str = Exor::code($key,$content);
+        dump('xor加密后的字符串:',$str);
+        //解密
+        dump('xor解密后的字符串:',Exor::code($key,$str));
+
+        /*jwt*/
+        $payload = [
+            'userid'=>123,
+            //签发时间
+            'iat'=>time(),
+            //过期时间
+            'exp'=>time()+10
+        ];
+        $str = JWT::encode($payload,$key,'HS384');
+        dump('jwt加密后的字符串:',$str);
+        dump('jwt解密后:',JWT::decode($str,$key,['HS384']));
+    }
+}

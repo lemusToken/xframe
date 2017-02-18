@@ -1,0 +1,13 @@
+<?php
+//App
+namespace [APPSPACE]\App[FIRSTNAME];
+use [APPSPACE]\App\App as BaseApp;
+
+
+/**
+ * 基类
+ * Class App
+ * @package [APPSPACE]\App[NAMEPATH]
+ */
+class App extends BaseApp {
+}

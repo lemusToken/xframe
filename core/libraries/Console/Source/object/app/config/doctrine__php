@@ -1,0 +1,10 @@
+<?php
+/**
+ * doctrine配置
+ */
+return [
+    //运行doctrine时的缓存引擎，只在生产环境下使用
+    'cache'=>'Xcache',
+    ///生成代理类文件的地址
+    'proxies'=>':cache'
+];

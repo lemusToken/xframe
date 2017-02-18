@@ -1,0 +1,9 @@
+<?php
+namespace [APPSPACE]\VM;
+
+class Index extends Vmodel {
+
+    public function demo() {
+        return ['say'=>'hello world!'];
+    }
+}

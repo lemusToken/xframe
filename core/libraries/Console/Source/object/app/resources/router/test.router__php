@@ -1,0 +1,19 @@
+<?php
+//主路由配置
+return [
+    //全匹配模式
+    'a/all.html'=>['app=test&act=index&type=1'],
+    //参数模式
+    'b/:a/:b/:c'=>['app=test&act=index&a=:a&b=:b&c=:c&type=2'],
+    //正则模式
+    'c/(.*?).html'=>['app=test&act=index&p=$1&type=3'],
+    //匹配成功后继续向下匹配
+    'd/a.html'=>['app=test&act=index&type=4',true],
+    //匹配成功后继续向下匹配
+    'd/:a.html'=>['app=test&act=index&type=5&pa=:a',true],
+    //匹配成功后，匹配结束
+    'd/(.*?).html'=>['app=test&act=index&type=5&pa=$1'],
+    //多页面的测试路由
+    'multipage'=>['app=test&act=multipage&ti=0'],
+    'multipage/:i'=>['app=test&act=multipage&ti=:i']
+];

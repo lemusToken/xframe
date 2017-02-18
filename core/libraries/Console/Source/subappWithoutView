@@ -1,0 +1,17 @@
+<?php
+//App
+namespace [APPSPACE]\App[NAMEPATH];
+use [APPSPACE]\App[FIRSTNAME]\App;
+
+/**
+ * 子控制器基类
+ * Class [NAME]
+ * @package [APPSPACE]\App[NAMEPATH]
+ */
+class [NAME] extends App {
+    /**
+     * act index
+     */
+    public function index() {
+    }
+}

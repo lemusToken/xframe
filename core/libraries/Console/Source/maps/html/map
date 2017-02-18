@@ -1,0 +1,22 @@
+<h1 id="[TABLE_NAME]">&lt;[TABLE_NAME]&gt; <span class="notice">[TABLE_DESC]</span></h1>
+<h2>编码校对:[TABLE_CHAR] 数据引擎:[TABLE_ENGINE]</h2>
+
+<div class="main">
+    <table class="container" cellspacing="0" cellpadding="0">
+        <thead>
+            <tr>
+                <th width="15%"><h1>字段名称</h1></th>
+                <th width="15%"><h1>类型</h1></th>
+                <th width="10%"><h1>编码校对方式</h1></th>
+                <th width="10%"><h1>是否NULL</h1></th>
+                <th width="10%"><h1>索引</h1></th>
+                <th width="10%"><h1>默认值</h1></th>
+                <th width="10%"><h1>其它</h1></th>
+                <th width="20%"><h1>注释</h1></th>
+            </tr>
+        </thead>
+        <tbody>
+        [TR]
+        </tbody>
+    </table>
+</div>

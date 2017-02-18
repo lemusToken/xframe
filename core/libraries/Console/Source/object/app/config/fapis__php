@@ -1,0 +1,8 @@
+<?php
+/**
+ * fapis配置
+ */
+return [
+    'client.file'=>'config.json_web_service_client.test.php',
+    'root'=>':root'
+];

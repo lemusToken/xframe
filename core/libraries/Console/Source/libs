@@ -1,0 +1,15 @@
+<?php
+namespace [APPSPACE]\Libs[NAMEPATH];
+
+/**
+ * Class [NAME]
+ * @package [APPSPACE]\Libs[NAMEPATH]
+ */
+class [NAME] {
+
+    /**
+     * act index
+     */
+    public function index() {
+    }
+}

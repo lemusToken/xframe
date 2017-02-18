@@ -1,0 +1,141 @@
+<?php
+namespace [APPSPACE]\VM\Demo;
+
+class Db extends \[APPSPACE]\VM\Vmodel{
+
+    public function demo() {
+        //数据库操作示例
+        /*
+         * 数据库连接
+         * 设置在:config/db.app
+         * 具体文档参见http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/index.html
+         */
+        //返回dbal实例
+        //参数留空，表示载入配置中default所对应的连接配置
+        //不为空，则表示对应连接名称
+        //true/false表示是否重新连接数据库，留空为false
+        $connect = $this->db('',false);
+
+        /*请先创建session表*/
+        /*
+         * 准备并执行一个SQL查询并返回“关联数组”，只取第一行
+         * PDO::FETCH_ASSOC
+         */
+        var_dump($connect->fetchAssoc('select * from session where id=:id limit 1',[':id'=>1]));
+        //等效上一句，注：pdo在预准备时，都会将预留参数转化为字符串，需要用\PDO::PARAM_INT之类强制转化成需要格式
+        //$connect->fetchAssoc('select * from session where id=? limit ?',[1,2]);这种情况下就会报错，limit后面的值不能是字符串'2'
+        var_dump($connect->fetchAssoc('select * from session where id=? limit ?',[1,2],[\PDO::PARAM_INT,\PDO::PARAM_INT]));
+
+        /*
+         * 准备并执行一个SQL查询并返回“索引数组”，只取第一行
+         * PDO::FETCH_NUM
+         */
+        var_dump($connect->fetchArray('select * from session where id=:id limit 1',[':id'=>1]));
+
+        /*
+         * 准备并执行一个SQL查询并返回结果集的第一项
+         * POD::FETCH_COLUMN
+         */
+        //返回的是session_id的字符串值
+        var_dump($connect->fetchColumn('select session_id from session limit 1'));
+
+        /**
+         * 准备并执行一个SQL查询并返回所有结果集，“关联数组”
+         */
+        var_dump($connect->fetchAll('select * from session'));
+        //in的使用方法
+        var_dump($connect->fetchAll('select * from session where id in (?)',[[1,2,3]],[\Doctrine\DBAL\Connection::PARAM_INT_ARRAY]));
+
+        /*
+         * 插入指定数据
+         * 表名，插入数据(关联数组)，各字段类型
+         * 返回受影响行数
+         */
+        var_dump($connect->insert('session',['session_id'=>mt_rand(1,1000)],['session_id'=>\PDO::PARAM_BOOL]));
+        //返回最后一次插入的值
+        var_dump($connect->lastInsertId());
+
+        /*
+         * 更新指定数据
+         * where部分只能用于=
+         * 返回影响行数
+         */
+        //相当于UPDATE session SET session_id = ? WHERE id = ?
+        var_dump($connect->update('session',['session_id'=>mt_rand(1,1000)],['id'=>1],['id'=>\PDO::PARAM_BOOL]));
+
+        /*
+         * 删除指定数据
+         * where部分只能用于=
+         * 返回影响行数
+         */
+        var_dump($connect->delete('session',['id'=>1],['id'=>\PDO::PARAM_INT]));
+
+        /*
+         * query帮助
+         * http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/query-builder.html
+         */
+        $builder = $connect->createQueryBuilder();
+        //创建查询实例
+        //join略
+        $query = $builder
+            ->select('id', 'session_id')
+            ->from('session')
+            ->where('id = ?')
+            //limit
+            ->setFirstResult(1)
+            ->setMaxResults(20)
+            //order by
+            ->orderBy('session_id', 'asc')
+            ->addOrderBy('id', 'desc')
+            ->setParameter(0, 3, \PDO::PARAM_INT);
+        //打印语句
+        var_dump($query->getSql());
+        //运行
+        //查询模式同上，可以是\PDO::其他模式
+        //也可以换成fetchAll、fetchColumn
+        var_dump($query->execute()->fetch(\PDO::FETCH_ASSOC));
+
+        $builder = $connect->createQueryBuilder();
+        //插入
+        $query = $builder
+            ->insert('session')
+            ->setValue('session_id', '?')
+            ->setValue('session_data', '?')
+            ->setParameter(0, mt_rand(1,1000), \PDO::PARAM_INT)
+            ->setParameter(1, 'something');
+
+        var_dump($query->getSql());
+        var_dump($query->execute());
+        //上一次插入的id
+        var_dump($connect->lastInsertId());
+
+        $builder = $connect->createQueryBuilder();
+        //更新
+        $query = $builder
+            ->update('session')
+            ->set('session_id', 'session_id+1')
+            ->set('session_data', '?')
+            ->where('id>0 and session_id=?')
+            ->setParameter(0, 'something right')
+            ->setParameter(1, 1, \PDO::PARAM_INT);
+
+        var_dump($query->getSql());
+        var_dump($query->execute());
+
+        $builder = $connect->createQueryBuilder();
+        //删除
+        $query = $builder
+            ->delete('session')
+            ->where('id>0 and session_id=?')
+            ->setParameter(0, '1', \PDO::PARAM_STR);
+
+        var_dump($query->getSql());
+        var_dump($query->execute());
+
+        /*
+         * 执行任意sql
+         */
+        //可用于执行create等语句
+        var_dump($connect->executeUpdate('delete from session where id=? ',[1],[\PDO::PARAM_INT]));
+    }
+}

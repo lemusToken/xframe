@@ -1,0 +1,29 @@
+<?php
+/**
+ * mysql连接配置(可以设置主从库)
+ * @link https://github.com/doctrine/dbal/blob/master/lib/Doctrine/DBAL/Connections/MasterSlaveConnection.php
+ */
+return [
+    //主从设置
+//    'master/slave'=>[
+//        'wrapperClass' => 'Doctrine\DBAL\Connections\MasterSlaveConnection',
+//        'driver' => 'pdo_mysql',
+//        'master' => ['user' => ':db.x.user', 'password' => ':db.x.password', 'host' => ':db.x.host', 'dbname' => ':db.x.dbname'],
+//        'slaves' => [
+//            ['user' => ':db.x.user', 'password' => ':db.x.password', 'host' => ':db.x.host', 'dbname' => ':db.x.dbname'],
+//        ]
+//    ],
+    //默认数据连接
+    'default'=>'x',
+    //数据库连接配置
+    //类似的可以建立多个
+    'x'=>[
+        'dbname' => ':db.x.dbname',
+        'user' => ':db.x.user',
+        'password' => ':db.x.password',
+        'host' => ':db.x.host',
+        'port' => ':db.x.port',
+        'driver' => 'pdo_mysql',
+        'charset'=>'utf8'
+    ]
+];

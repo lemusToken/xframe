@@ -1,0 +1,32 @@
+{
+    "name": "x/core",
+    "license": "MIT",
+    "type": "project",
+    "description": "Framework",
+    "autoload": {
+        "psr-4": {
+            "Libs\\":"libraries"
+		},
+        "files": ["bootstrap.php"],
+        "classmap": []
+    },
+    "require": {
+        "php": ">=5.4.0",
+		"twig/extensions": "~1.2",
+        "doctrine/orm": "~2.5",
+        "symfony/var-dumper":"~2.8.9",
+        "phpfastcache/phpfastcache":"4.3.*",
+        "filp/whoops":"1.1.*",
+        "symfony/yaml":"2.*",
+        "rmccue/requests": ">=1.0",
+        "mrclay/minify": "*",
+        "cebe/markdown":"*",
+        "aliyuncs/oss-sdk-php": "*"
+    },
+    "repositories": {
+        "packagist": {
+            "type": "composer",
+            "url": "https://packagist.phpcomposer.com"
+        }
+    }
+}

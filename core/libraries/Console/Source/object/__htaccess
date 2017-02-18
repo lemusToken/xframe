@@ -1,0 +1,7 @@
+RewriteEngine On
+
+RewriteCond %{REQUEST_URI} !^.*(\.ico|\.css|\.js|\.gif|\.png|\.jpg|\.jpeg|\.bmp)$
+RewriteCond %{REQUEST_FILENAME} !-s
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ /index.php?__router=$1 [QSA,PT,L]

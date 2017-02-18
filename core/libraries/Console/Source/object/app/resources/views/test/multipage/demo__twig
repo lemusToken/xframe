@@ -1,0 +1,21 @@
+<p>---------multipage/demo.twig-------</p>
+<div><span>{{ a }}</span> {{ r }}</div>
+<p>----------------------------------</p>
+
+<p>---------multipage/demo1.twig------</p>
+{{ load('test/multipage/1')|raw }}
+<p>----------------------------------</p>
+
+<p>---------multipage/demo2.twig------</p>
+{{ load('test/multipage/2')|raw }}
+<p>----------------------------------</p>
+
+<p>---------multipage/demo3.twig------</p>
+{% load 'test/multipage/3' %}
+<div><span>{{ a }}</span> {{ r }}</div>
+{% endload %}
+<p>----------------------------------</p>
+
+<p>---------multipage/demo.twig------</p>
+<div><span>{{ a }}</span> {{ r }}</div>
+<p>----------------------------------</p>

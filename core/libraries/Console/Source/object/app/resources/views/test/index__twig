@@ -1,0 +1,44 @@
+{#继承的模板#}
+{% extends 'test/public/layout.twig' %}
+
+{% block title %}
+    模板测试
+{% endblock %}
+
+{% block assets_footer %}
+    {#没用parent()，子级内容会覆盖父级#}
+    <script>
+        alert('child footer');
+    </script>
+{% endblock %}
+
+{% block assets_header %}
+    {#parent()用于获取父级的内容，防止覆盖父级内容#}
+    {{ parent() }}
+    <script>
+        alert('child header');
+    </script>
+{% endblock %}
+
+{% block content %}
+    {{ alert('alert用于打印数据',a) }}
+    {#true表示是否加版本号#}
+    {{ ':app'|path(true) }}
+    {{ ':app'|path }}
+    {#static请在符号表中定义#}
+    {{ ':static/somepath/some.js'|static }}
+    {{ ':static/somepath/some.css'|static }}
+    {#查看源代码看结果#}
+    {#{{ ':static/somepath/some.js'|static|raw }}#}
+    {#{{ ':static/somepath/some.css'|static|raw }}#}
+    {% dev %}
+    <h1>非生产环境</h1>
+    {% enddev %}
+    {% pro %}
+    <h1>正式环境</h1>
+    {% endpro %}
+
+    {#实例操作#}
+    {{ vm_index.demo.say }}
+{% endblock %}
+

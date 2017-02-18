@@ -1,0 +1,129 @@
+<?php
+namespace [APPSPACE]\VM[NAMEPATH];
+
+use Libs\VModel\BaseTable;
+/**
+ * Class [NAME]
+ * @package [APPSPACE]\VM[NAMEPATH]
+ */
+class [NAME] extends BaseTable {
+    /**
+     * 数据库链接配置名称
+     * @var string
+     */
+    const DB_CFG_NAME = 'chemao';
+    /**
+     * 构造函数
+     */
+    public function __construct(){
+        /*主表的字段定义*/
+        $aFields = array(
+            'id'=>'id',
+            'utc_create'=>'创建时间 unix timestemp',
+        );
+        /*构造初始化数据*/
+        parent::__construct('填写主表表名', $aFields, self::DB_CFG_NAME);
+    }
+    /**
+     * 获取信息的详情
+     * @param int $iAreaId
+     * @param array $aFields
+     * <li>需要输出的字段，默认为array()，输出所有已定义的字段</li>
+     * @return false | array()
+     */
+    public function getInfoById($iAreaId, $aFields=array()){
+        return parent::get_info_by_id(intval($iAreaId), $aFields, 'id');
+    }
+    
+    
+    /**
+     * 样例代码开始开发时请删除
+     */
+	public function example() {
+        /*获取主表名称*/
+        var_dump($this->sTabN);
+        
+        //--------------------
+        /*事务的处理:初级指令*/
+//         $this->oDb->beginTransaction();
+//         $this->oDb->commit();
+//         $this->oDb->rollBack();
+        
+        /*基本的数据查询自己执行的方式*/
+//         $this->oDb->fetchAll(); //取整个记录集
+//         $this->oDb->fetchArray(); //获取记录集的首行的数组
+        
+        /*执行任务指令: 初级指令*/
+//         $oSmt = $this->oDb->prepare('sql 语句');
+//         $oSmt->execute(array(':id'=>'...')); //绑定参数
+//         $oSmt->rowCount(); //获取影响的记录条数
+//         $this->oDb->lastInsertId(); //获取最后一个insert的自增id
+        //--------------------
+        
+        
+        //数据库操作对象
+//         $this->oDb;
+        
+        /*获取详情*/
+//         var_dump($this->getInfoById(220));
+        
+        /*获取统计值*/
+//         $aSql = array();
+//         $aSql[] = 'SELECT COUNT(0)';
+//         $aSql[] =  ' FROM '. $this->sTabN;
+//         $aSql[] = ' WHERE id>:id';
+//         var_dump($this->getCnt($aSql, [':id'=>1]));
+        
+        /*获取单行记录*/
+//         $aSql = array();
+//         $aSql[] = 'SELECT '. implode(',', $this->aField);
+//         $aSql[] =  ' FROM '. $this->sTabN;
+//         $aSql[] = ' WHERE id=:id';
+//         var_dump($this->get_row($aSql, [':id'=>220]));
+        
+        /*获取整个记录集*/
+//         $aSql = array();
+//         $aSql[] = 'SELECT '. implode(',', $this->aField);
+//         $aSql[] =  ' FROM '. $this->sTabN;
+//         $aSql[] = ' WHERE id>:id';
+//         var_dump($this->find($aSql, [':id'=>220], [\PDO::PARAM_INT]));
+        /*获取整个记录集 - 之 IN 的操作*/
+//         $aSql = array();
+//         $aSql[] = 'SELECT '. implode(',', $this->aField);
+//         $aSql[] =  ' FROM '. $this->sTabN;
+//         $aSql[] = ' WHERE id IN (:ids)';
+//         var_dump($this->find($aSql, [':ids'=>[220,221]], [':ids'=>\Doctrine\DBAL\Connection::PARAM_INT_ARRAY]));
+
+        /*获取整个记录集 - 之 分页获取*/
+//         $aSql = array();
+//         $aSql[] = 'SELECT '. implode(',', $this->aField);
+//         $aSql[] =  ' FROM '. $this->sTabN;
+//         $aSql[] = ' WHERE id>:id';
+//         var_dump($this->findPage($aSql, [':id'=>220], [\PDO::PARAM_INT], 1, 2) );
+
+        /*插入单行记录*/
+//         $aInDt = array('user_id'=>11911, 'equipment'=>'123123ed4', 'app_name'=>'wap',
+//             'imuser_userid'=>'im123456', 'imuser_password'=>'sadf123', 'gmt_create'=>time(), 'gmt_modify'=>time());
+//         var_dump($this->insert($aInDt, 'fc_test'));
+        
+        /*批量插入记录*/
+//         $aFields = array('user_id', 'equipment', 'app_name', 'imuser_userid', 'imuser_password', 'gmt_create', 'gmt_modify');
+//         $aValue = array();
+//         for ($i=0; $i<500; $i++){ //测试一次插入500条记录
+//             $aValue[] = array(rand(10000, 99999), 'abcdef'.rand(1000000, 9999999), 'wap', rand(10000, 99999), '12345678', time(), time());
+//         }
+//         var_dump($this->insertBatch($aFields, $aValue, 'fc_test'));
+
+        /*插入单行记录（延迟插入）*/
+//         $aInDt = array('user_id'=>11911, 'equipment'=>'123123ed3', 'app_name'=>'wap', 
+//             'imuser_userid'=>'im123456', 'imuser_password'=>'sadf123', 'gmt_create'=>time(), 'gmt_modify'=>time());
+//         var_dump($this->insertDelay($aInDt, 'fc_test'));
+
+        /*单表记录更新*/
+//         $aIUpDt = array('user_id'=>20000, 'app_name'=>'wap', 'gmt_modify'=>time());
+//         var_dump($this->update($aIUpDt, 'id>:id', [':id'=>1500], 'fc_test'));
+
+        /*单表删除记录*/
+//         var_dump($this->delete('id=:id', [':id'=>1504], 'fc_test'));
+    }
+}

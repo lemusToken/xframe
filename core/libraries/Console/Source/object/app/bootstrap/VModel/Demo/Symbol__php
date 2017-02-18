@@ -1,0 +1,68 @@
+<?php
+namespace [APPSPACE]\VM\Demo;
+
+class Symbol extends \[APPSPACE]\VM\Vmodel{
+
+    public function demo() {
+        //符号示例
+        /*获取实例*/
+        $symbol = $this->symbol();
+
+        /*添加符号词库*/
+        //添加字符串(词名,值)
+        $symbol->add('a','some a');
+        //添加数组(数组，支持多维)
+        $symbol->add([
+            'b'=>'some b',
+            'c'=>'some c',
+            'cc'=>'some cc!',
+            'd'=>[
+                'e'=>'some d->e',
+                'f'=>[
+                    'g'=>'some d->f->g'
+                ]
+            ],
+            //符号的值可以是符号
+            'e'=>':b/:c/:d.e'
+        ]);
+        //添加词库文件，文件其实是返回数组的php文件
+        //$symbol->add('路径/name.php');
+
+        /*词库保存，添加的词只有保存后才能生效*/
+        $symbol->save();
+
+        /*打印符号表*/
+        $map = $symbol->printMap();
+        dump($map);
+
+        /*符号操作*/
+        //符号定义:+字符串(不能出现['{','{:',':',' ','/','?','#']其中任何一个，出现任何一个表示符号的结束)
+        $str = $symbol->parse(':c/:a/:d.f.g');//结果: some c/some a/some d->f->g
+        dump($str);
+        //符号的符号解析
+        $str = $symbol->parse(':e');//结果: some b/some c/some d->e
+        dump($str);
+        //转义: \:
+        $str = $symbol->parse(':c/:a/\:d.f.g');//结果: some c/some a/:d.f.g
+        dump($str);
+        //{:...} 用于包含正确符号，防止符号错误链接
+        $str = $symbol->parse(':c/:cc');//结果: some c/some cc!
+        dump($str);
+        $str = $symbol->parse(':c/{:c}c');//结果: some c/some cc
+        dump($str);
+
+        /*缓存结果*/
+        //第二个参数设为true则表示缓存该次结果，下次如果待解析的字符串与这次相同，直接从缓存中输出结果
+        $str = $symbol->parse(':c/{:c}c',true);
+        dump($str);
+
+        /*临时符号表*/
+        //第三个参数不为空则表示使用临时输入的符号表
+        $str = $symbol->parse(':c/{:c}c',false,['c'=>'yse']);//结果: yse/ysec
+        dump($str);
+
+        /*判断符号是否已经存在*/
+        //注：符号具有只读属性，定义之后将不可变更
+        dump($symbol->exist('a'));//true
+    }
+}

@@ -1,0 +1,16 @@
+<?php
+//主路由配置
+return [
+    //domain domain/=>app=index,act=index
+    '/'=>['app=index&act=index'],
+    //domain/index=>app=index,act=index
+    '/index'=>['app=index&act=index'],
+    //domain/some=>app=some,act=index;true代表继续往后匹配
+    '(.*?)'=>['app=$1&act=index',true],
+    //domain/some.html=>app=some,act=index
+    '(.*?).html'=>['app=$1&act=index',true],
+    //domain/someapp/someact=>app=someapp,act=someact
+    '(.*?)/(.+)'=>['app=$1&act=$2',true],
+    //domain/someapp/someact.html=>app=someapp,act=someact
+    '(.*?)/(.+)\.html'=>['app=$1&act=$2',true]
+];

@@ -1,0 +1,29 @@
+<?php
+//应用框架入口
+//项目根目录
+define('ROOT_PATH',__DIR__);
+//核心框架目录(需要根据实际情况更改)
+//获取项目上一级目录
+//unix内核系统下，没有虚拟目录时
+if (isset($_SERVER['PWD'])&&$_SERVER['PWD']===__DIR__.'/app/bin') {
+    $coreBase = __DIR__;
+}
+//unix内核系统下，有虚拟目录时
+elseif (!empty($_SERVER['PWD'])) {
+    $coreBase = $_SERVER['PWD'];
+}
+//window系统下
+elseif (!empty($_SERVER['DOCUMENT_ROOT'])) {
+    $coreBase = $_SERVER['DOCUMENT_ROOT'];
+}
+else {
+    $coreBase = __DIR__;
+}
+define('CORE_BASE',dirname($coreBase));
+define('CORE_PATH',CORE_BASE.'/xframe/core');
+//应用目录
+define('APP_PATH',__DIR__.DIRECTORY_SEPARATOR.'app');
+//类自动加载
+require CORE_PATH.'/vendor/autoload.php';
+
+BootStrap::run();

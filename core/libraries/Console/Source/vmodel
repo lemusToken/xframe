@@ -1,0 +1,21 @@
+<?php
+namespace [APPSPACE]\VM[NAMEPATH];
+
+/**
+ * Class [NAME]
+ * @package [APPSPACE]\VM[NAMEPATH]
+ */
+class [NAME] extends \[APPSPACE]\VM\Vmodel {
+
+    public function index() {
+    }
+
+    /**
+     * 清除缓存
+     * @param $name string 方法名
+     * @return bool
+     */
+    public function clear($name) {
+        return parent::clear($name);
+    }
+}

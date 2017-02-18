@@ -1,0 +1,25 @@
+<?php
+
+namespace App\Libs\Console;
+
+
+class Register {
+
+    /**
+     * 注册命令
+     * @return array
+     */
+    public static function commands() {
+        return [
+        ];
+    }
+
+    /**
+     * 注册命令帮助
+     * @return array
+     */
+    public static function helpers() {
+        return [
+        ];
+    }
+}

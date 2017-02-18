@@ -1,0 +1,30 @@
+<?php
+/**
+ * 框架功能控制
+ */
+return [
+    //当前app名称
+    'appname'=>[APPSPACE],
+    //默认时区
+    'timezone'=>'prc',
+    //版本控制文件路径(多文件|隔开，由左向右匹配)
+    'version.file'=>':root/../version/static.version',
+    //外部符号词库的地址(注意：该文件会和应用下config/symbol合并，建议将随环境变化部分的配置写入该文件中)
+    //建议文件在项目目录外
+    'symbol.file'=>':root/../symbols/symbol.php',
+    //logger引擎
+    'logger'=>'file',
+    //是否开启错误日志记录功能（只在生产环境中有效）
+    'logger.error.enable'=>true,
+    //日志的记录地址
+    'logger.path'=>':logs',
+    //是否开启session共享(默认memcache，memcache扩展不能用时用db)
+    'session.share'=>false,
+    //sessionid的名称
+    'session.name'=>'xssid',
+    //默认一天（分）
+    'session.time'=>24*60,
+    //触发session垃圾回收的概率，null表示默认概率
+    'session.gc'=>null,
+    'token.secret'=>[TOKENKEY]
+];

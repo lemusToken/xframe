@@ -1,0 +1,25 @@
+<?php
+namespace [APPSPACE]\VM\Demo;
+
+class Config extends \[APPSPACE]\VM\Vmodel{
+
+    public function demo() {
+        //配置示例
+        /*获取实例*/
+        //参数表示config的文件名，即config/db.php
+        $config = $this->config('db');
+
+        /*读取*/
+        //所有配置解析后均会缓存结果
+        //获取所有值，不解析符号
+        dump($config->item());
+        //获取所有值，解析第一维的符号
+        dump($config->item(true));
+        //获取所有值，递归解析所有维度的符号
+        dump($config->item(true,true));
+        //获取单个项值，解析第一维的符号
+        dump($config->item('default'));
+        //获取单个项值，递归解析所有维度的符号
+        dump($config->item('default',true));
+    }
+}
